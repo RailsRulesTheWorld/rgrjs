@@ -11,19 +11,19 @@ app.use(express.static('public'));
 let db;
 console.log(process.env.MONGO_URL);
 MongoClient.connect(process.env.MONGO_URL, (err, database) => {
+  if (err) throw err;
+
+  database.collection('links').find({}).toArray((err, links) => {
     if (err) throw err;
 
-    database.collection('links').find({}).toArray((err, links) => {
-        if (err) throw err;
+    db = database;
 
-        db = database;
-
-        app.use('/graphql', GraphQLHTTP({
-            schema: schema(db),
-            graphiql: true,
-        }));
-        app.listen(3000, () => console.log('Listening on port 3000'));
-    });
+    app.use('/graphql', GraphQLHTTP({
+      schema: schema(db),
+      graphiql: true,
+    }));
+    app.listen(3000, () => console.log('Listening on port 3000'));
+  });
 });
 
 // app.get('/data/links', (req, res) => {
