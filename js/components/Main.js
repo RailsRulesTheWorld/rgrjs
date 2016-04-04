@@ -33,7 +33,7 @@ class Main extends Component {
 
 
     render() {
-        const content = this.state.links.map((link) => {
+        const content = this.state.links.slice(0, this.props.limit).map((link) => {
             return (
                 <li key={link.id}>
                     <a href={link.url}>{link.title}</a>
@@ -50,6 +50,10 @@ class Main extends Component {
             </div>
         );
     }
+}
+
+Main.propTypes = {
+
 }
 
 export default Main;

@@ -1,5 +1,7 @@
 .vscode
 
+jsconfig.json
+
 .DS_Store
 .AppleDouble
 .LSOverride

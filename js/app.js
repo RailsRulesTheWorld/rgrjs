@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom'; 
+import ReactDOM from 'react-dom';
 
 import Main from './components/Main';
 
-
-ReactDOM.render(<Main />, document.getElementById('react'));
+ReactDOM.render(<Main limit={1} />, document.getElementById('react'));
