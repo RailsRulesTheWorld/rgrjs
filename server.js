@@ -26,8 +26,8 @@ MongoClient.connect(process.env.MONGO_URL, (err, database) => {
     });
 });
 
-app.get('/data/links', (req, res) => {
-    db.collection('links').find({}).toArray((err, links) => {
-        res.json(links);
-    });
-});
+// app.get('/data/links', (req, res) => {
+//     db.collection('links').find({}).toArray((err, links) => {
+//         res.json(links);
+//     });
+// });
