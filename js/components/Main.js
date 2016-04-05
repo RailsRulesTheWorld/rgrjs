@@ -7,6 +7,13 @@ const _getAppStore = () => ({
 });
 
 class Main extends Component {
+  static propTypes = {
+    limit: PropTypes.number,
+  };
+
+  static defaultProps = {
+    limit: 1,
+  };
   constructor(props) {
     super(props);
 
@@ -46,9 +53,5 @@ class Main extends Component {
     );
   }
 }
-
-Main.propTypes = {
-  limit: PropTypes.number,
-};
 
 export default Main;
