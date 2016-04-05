@@ -17,6 +17,9 @@
         "react"
     ],
     "rules": {
+        "new-cap": [2, {
+          "capIsNewExceptions": ["GraphQLHTTP"]
+        }],
         "indent": [
             "error",
             2
@@ -33,5 +36,9 @@
             "error",
             "always"
         ]
-    }
+    },
+    "ignore": [
+      "node_modules",
+      "public"
+    ]
 }

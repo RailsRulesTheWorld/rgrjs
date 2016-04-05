@@ -12,11 +12,11 @@ const API = {
                     title,
                     url
                 }
-            }`
+            }`,
     }).done(resp => {
       ServerActions.receiveLinks(resp.data.links);
     });
-  }
+  },
 };
 
 

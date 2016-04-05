@@ -13,8 +13,8 @@ console.log(process.env.MONGO_URL);
 MongoClient.connect(process.env.MONGO_URL, (err, database) => {
   if (err) throw err;
 
-  database.collection('links').find({}).toArray((err, links) => {
-    if (err) throw err;
+  database.collection('links').find({}).toArray((e) => {
+    if (e) throw e;
 
     db = database;
 

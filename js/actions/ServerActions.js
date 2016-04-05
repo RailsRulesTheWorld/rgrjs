@@ -6,9 +6,9 @@ const ServerActions = {
     console.log('2. In ServerActions');
     AppDispatcher.dispatch({
       actionType: ActionTypes.RECEIVE_LINKS,
-      links
+      links,
     });
-  }
+  },
 };
 
 export default ServerActions;

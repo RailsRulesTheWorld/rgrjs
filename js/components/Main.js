@@ -1,12 +1,10 @@
 import API from '../API';
-import React, {Component} from 'react';
+import React, { Component, PropTypes } from 'react';
 import LinkStore from '../stores/LinkStore';
 
-const _getAppStore = () => {
-  return {
-    links: LinkStore.getAll()
-  };
-}
+const _getAppStore = () => ({
+  links: LinkStore.getAll(),
+});
 
 class Main extends Component {
   constructor(props) {
@@ -14,6 +12,11 @@ class Main extends Component {
 
     this.state = _getAppStore();
     this.onChange = this.onChange.bind(this);
+  }
+
+  componentDidMount() {
+    API.fetchLinks();
+    LinkStore.on('change', this.onChange);
   }
 
   componentWillUnmount() {
@@ -26,20 +29,12 @@ class Main extends Component {
     this.setState(_getAppStore());
   }
 
-  componentDidMount() {
-    API.fetchLinks();
-    LinkStore.on('change', this.onChange);
-  }
-
-
   render() {
-    const content = this.state.links.slice(0, this.props.limit).map((link) => {
-      return (
-        <li key={link.id}>
-          <a href={link.url}>{link.title}</a>
-        </li>
-      );
-    });
+    const content = this.state.links.slice(0, this.props.limit).map((link) =>
+      <li key={link.id}>
+        <a href={link.url}>{link.title}</a>
+      </li>
+    );
 
     return (
       <div>
@@ -53,7 +48,7 @@ class Main extends Component {
 }
 
 Main.propTypes = {
-
-}
+  limit: PropTypes.number,
+};
 
 export default Main;
