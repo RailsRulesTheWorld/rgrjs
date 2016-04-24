@@ -12,14 +12,10 @@ class Main extends Component {
   };
 
   static defaultProps = {
-    limit: 1,
+    limit: 4,
   };
-  constructor(props) {
-    super(props);
 
-    this.state = _getAppStore();
-    this.onChange = this.onChange.bind(this);
-  }
+  state = _getAppStore();
 
   componentDidMount() {
     API.fetchLinks();
@@ -31,10 +27,10 @@ class Main extends Component {
   }
 
 
-  onChange() {
+  onChange = () => {
     console.log('4. In onChange');
     this.setState(_getAppStore());
-  }
+  };
 
   render() {
     const content = this.state.links.slice(0, this.props.limit).map((link) =>
