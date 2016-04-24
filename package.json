@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "babel-node --presets react,es2015 server.js",
+    "start": "babel-node --presets react,es2015,stage-0 server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -dw"
   },
