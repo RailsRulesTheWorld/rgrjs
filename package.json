@@ -11,8 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-core": "^6.7.4",
+    "babel-core": "~6.5.2",
     "babel-loader": "^6.2.4",
+    "babel-relay-plugin": "^0.8.0",
     "events": "^1.1.0",
     "express": "^4.13.4",
     "express-graphql": "^0.4.13",
@@ -21,7 +22,8 @@
     "jquery": "^2.2.2",
     "mongodb": "^2.1.14",
     "react": "^0.14.8",
-    "react-dom": "^0.14.8"
+    "react-dom": "^0.14.8",
+    "react-relay": "^0.8.0"
   },
   "devDependencies": {
     "babel-eslint": "^6.0.2",
