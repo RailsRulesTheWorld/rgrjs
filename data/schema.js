@@ -6,8 +6,9 @@ import {
 } from 'graphql';
 
 const Schema = (db) => {
+  // 注意下面的 name 改变了
   const linkType = new GraphQLObjectType({
-    name: '_id',
+    name: 'Link',
     fields: () => ({
       _id: { type: GraphQLString },
       title: { type: GraphQLString },
