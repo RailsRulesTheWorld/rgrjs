@@ -28,6 +28,10 @@ class Main extends Component {
   }
 }
 
+Main.propTypes = {
+  store: PropTypes.object.isRequired,
+};
+
 // Declare the data requirement for this component
 
 Main = Relay.createContainer(Main, {
