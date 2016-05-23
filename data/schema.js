@@ -1,28 +1,45 @@
 import {
   GraphQLSchema,
-  GraphQLList,
   GraphQLObjectType,
   GraphQLString,
+  GraphQLNonNull,
+  GraphQLID,
 } from 'graphql';
+
+import {
+  connectionDefinitions,
+  connectionArgs,
+  connectionFromPromisedArray,
+} from 'graphql-relay';
 
 const Schema = (db) => {
   // 注意下面的 name 改变了
   const linkType = new GraphQLObjectType({
     name: 'Link',
     fields: () => ({
-      _id: { type: GraphQLString },
+      id: { // 注意之前的_id变为此处的id, 并在 resolve 里 return _id
+        type: new GraphQLNonNull(GraphQLID),
+        resolve: (obj) => obj._id,
+      },
       title: { type: GraphQLString },
       url: { type: GraphQLString },
     }),
   });
+
+  const linkConnection = connectionDefinitions({
+    name: 'Link',
+    nodeType: linkType,
+  });
+
   const store = {};
   // 注意下面的name，如果跟已有的同名的话， 会出现不报任何错误但server启动不起来的状况
   const storeType = new GraphQLObjectType({
     name: 'Store',
     fields: () => ({
-      links: {
-        type: new GraphQLList(linkType),
-        resolve: () => db.collection('links').find({}).toArray(), // TODO: Read from Mongo
+      linkConnection: {
+        type: linkConnection.connectionType,
+        args: connectionArgs,
+        resolve: (_, args) => connectionFromPromisedArray(db.collection('links').find({}).toArray(), args),
       },
     }),
   });

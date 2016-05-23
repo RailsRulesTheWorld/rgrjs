@@ -12,24 +12,28 @@ const app = express();
 app.use(express.static('public'));
 
 (async () => {
-  const db = await MongoClient.connect(process.env.MONGO_URL);
+  try {
+    const db = await MongoClient.connect(process.env.MONGO_URL);
 
-  const schema = Schema(db);
+    const schema = Schema(db);
 
-  app.use('/graphql', GraphQLHTTP({
-    schema,
-    graphiql: true,
-  }));
+    app.use('/graphql', GraphQLHTTP({
+      schema,
+      graphiql: true,
+    }));
 
-  app.listen(3000, () => console.log('Listening on port 3000'));
+    app.listen(3000, () => console.log('Listening on port 3000'));
 
-  // Generate schema.json
-  const json = await graphql(schema, introspectionQuery);
-  fs.writeFile('./data/schema.json', JSON.stringify(json, null, 2), err => {
-    if (err) throw err;
+    // Generate schema.json
+    const json = await graphql(schema, introspectionQuery);
+    fs.writeFile('./data/schema.json', JSON.stringify(json, null, 2), err => {
+      if (err) throw err;
 
-    console.log('JSON schema created');
-  });
+      console.log('JSON schema created');
+    });
+  } catch (error) {
+    console.log(error);
+  }
 })(); // 使用async await语法可以避免无关业务的数据库连接错误等检查代码，更加简洁
 
 // let db;
